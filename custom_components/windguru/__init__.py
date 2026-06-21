@@ -29,7 +29,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         await hass.http.async_register_static_paths(
             [StaticPathConfig(FRONTEND_URL, str(frontend_file), cache_headers=True)]
         )
-        add_extra_js_url(hass, f"{FRONTEND_URL}?v=1.2.2")
+        add_extra_js_url(hass, f"{FRONTEND_URL}?v=1.2.3")
         domain_data[DATA_FRONTEND_REGISTERED] = True
 
     coordinator = WindguruDataCoordinator(hass, entry)

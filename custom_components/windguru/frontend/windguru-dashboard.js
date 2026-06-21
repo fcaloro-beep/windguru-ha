@@ -189,7 +189,7 @@ class WindguruDashboard extends HTMLElement {
             </div>
             <div class="panel temperature" data-entity="${this._escape(this.config.temperature_entity)}">
               <div class="temp-left"><div class="thermometer"><ha-icon icon="mdi:thermometer"></ha-icon></div><div><div class="caption">Temperatura esterna</div><div class="temp-value">${temperatureText}<small> °C</small></div></div></div>
-              <div class="caption">Talamone</div>
+              <div class="caption">${title}</div>
             </div>
           </div>
         </div>
