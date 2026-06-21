@@ -14,7 +14,7 @@ Windguru weather stations.
 
 ## Talamone dashboard
 
-Version 1.2.0 includes a dashboard card with no additional frontend dependency.
+Version 1.2.1 includes a dashboard card with no additional frontend dependency.
 After restarting Home Assistant, add a manual card and paste:
 
 ```yaml
@@ -25,6 +25,9 @@ average_entity: sensor.talamone_wind_average
 gust_entity: sensor.talamone_wind_gust
 temperature_entity: sensor.talamone_temperature
 max_speed: 40
+grid_options:
+  columns: full
+  rows: auto
 ```
 
 The compass follows wind direction, the main gauge shows average wind and the

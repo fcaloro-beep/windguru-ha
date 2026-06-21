@@ -32,6 +32,14 @@ class WindguruDashboard extends HTMLElement {
     return 5;
   }
 
+  getGridOptions() {
+    return {
+      columns: "full",
+      rows: "auto",
+      min_columns: 6,
+    };
+  }
+
   _number(entityId) {
     const value = Number.parseFloat(this._hass?.states?.[entityId]?.state);
     return Number.isFinite(value) ? value : null;
