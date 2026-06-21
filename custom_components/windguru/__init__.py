@@ -1,13 +1,21 @@
 import logging
 from datetime import timedelta
+from pathlib import Path
 
+from homeassistant.components.frontend import add_extra_js_url
+from homeassistant.components.http import StaticPathConfig
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
 from .api import WindguruApiClient, WindguruApiError
-from .const import DEFAULT_SCAN_INTERVAL, DOMAIN
+from .const import (
+    DATA_FRONTEND_REGISTERED,
+    DEFAULT_SCAN_INTERVAL,
+    DOMAIN,
+    FRONTEND_URL,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -15,9 +23,18 @@ PLATFORMS = ["sensor"]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    domain_data = hass.data.setdefault(DOMAIN, {})
+    if not domain_data.get(DATA_FRONTEND_REGISTERED):
+        frontend_file = Path(__file__).parent / "frontend" / "windguru-dashboard.js"
+        await hass.http.async_register_static_paths(
+            [StaticPathConfig(FRONTEND_URL, str(frontend_file), cache_headers=True)]
+        )
+        add_extra_js_url(hass, f"{FRONTEND_URL}?v=1.2.0")
+        domain_data[DATA_FRONTEND_REGISTERED] = True
+
     coordinator = WindguruDataCoordinator(hass, entry)
     await coordinator.async_config_entry_first_refresh()
-    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
+    domain_data[entry.entry_id] = coordinator
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 

@@ -1,5 +1,8 @@
 DOMAIN = "windguru"
 
+DATA_FRONTEND_REGISTERED = "frontend_registered"
+FRONTEND_URL = "/windguru/windguru-dashboard.js"
+
 DEFAULT_SCAN_INTERVAL = 300
 MIN_SCAN_INTERVAL = 60
 

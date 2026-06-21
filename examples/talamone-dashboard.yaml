@@ -1,0 +1,7 @@
+type: custom:windguru-dashboard
+title: Talamone
+direction_entity: sensor.talamone_wind_direction
+average_entity: sensor.talamone_wind_average
+gust_entity: sensor.talamone_wind_gust
+temperature_entity: sensor.talamone_temperature
+max_speed: 40

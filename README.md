@@ -10,6 +10,25 @@ Windguru weather stations.
 - Temperature, atmospheric pressure and humidity.
 - Configurable refresh interval (minimum 60 seconds).
 - English and Italian configuration screens.
+- Built-in wind dashboard card with compass, average/gust gauge and temperature.
+
+## Talamone dashboard
+
+Version 1.2.0 includes a dashboard card with no additional frontend dependency.
+After restarting Home Assistant, add a manual card and paste:
+
+```yaml
+type: custom:windguru-dashboard
+title: Talamone
+direction_entity: sensor.talamone_wind_direction
+average_entity: sensor.talamone_wind_average
+gust_entity: sensor.talamone_wind_gust
+temperature_entity: sensor.talamone_temperature
+max_speed: 40
+```
+
+The compass follows wind direction, the main gauge shows average wind and the
+orange marker follows gust speed. Humidity is intentionally not displayed.
 
 ## Installation
 
