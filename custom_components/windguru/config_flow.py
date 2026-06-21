@@ -153,14 +153,14 @@ class WindguruConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         params = {"q": "station", "id_station": self._station_id, "weather": True}
 
         try:
-        async with async_timeout.timeout(10):
-            resp = await session.get(API_BASE, headers=headers, params=params)
-            station = await resp.json()
-    except (aiohttp.ClientError, TimeoutError):
-        return self.async_show_form(
-            step_id="confirm", data_schema=self._confirm_schema(f"Station {self._station_id}"),
-            description_placeholders={"station": f"(ID {self._station_id})"},
-        )
+            async with async_timeout.timeout(10):
+                resp = await session.get(API_BASE, headers=headers, params=params)
+                station = await resp.json()
+        except (aiohttp.ClientError, TimeoutError):
+            return self.async_show_form(
+                step_id="confirm", data_schema=self._confirm_schema(f"Station {self._station_id}"),
+                description_placeholders={"station": f"(ID {self._station_id})"},
+            )
 
         default_name = station.get("name") or station.get("spotname", f"Station {self._station_id}")
 
