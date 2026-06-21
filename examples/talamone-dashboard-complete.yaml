@@ -1,0 +1,21 @@
+title: Windguru
+views:
+  - title: Talamone
+    path: talamone
+    icon: mdi:weather-windy
+    type: sections
+    max_columns: 2
+    sections:
+      - type: grid
+        column_span: 2
+        cards:
+          - type: custom:windguru-dashboard
+            title: Talamone
+            direction_entity: sensor.talamone_wind_direction
+            average_entity: sensor.talamone_wind_average
+            gust_entity: sensor.talamone_wind_gust
+            temperature_entity: sensor.talamone_temperature
+            max_speed: 40
+            grid_options:
+              columns: full
+              rows: auto

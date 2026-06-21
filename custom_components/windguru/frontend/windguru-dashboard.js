@@ -106,6 +106,7 @@ class WindguruDashboard extends HTMLElement {
       <style>
         :host { display: block; }
         ha-card {
+          container-type: inline-size;
           overflow: hidden; color: #f7fbff;
           background: radial-gradient(circle at 12% 5%, rgba(62,194,255,.26), transparent 34%),
             linear-gradient(145deg, #102c46 0%, #0b2035 58%, #071725 100%);
@@ -118,7 +119,7 @@ class WindguruDashboard extends HTMLElement {
         .live { display:flex; align-items:center; gap:7px; color:#b9d7e8; font-size:11px; font-weight:700; letter-spacing:.12em; }
         .live::before { width:8px; height:8px; content:""; border-radius:50%; background:#48e0a4; box-shadow:0 0 0 5px rgba(72,224,164,.12); }
         .layout { display:grid; grid-template-columns:minmax(210px,.9fr) minmax(270px,1.25fr); gap:14px; padding:12px 18px 18px; }
-        .panel { position:relative; border:1px solid rgba(156,218,248,.13); border-radius:20px; background:rgba(255,255,255,.045); cursor:pointer; transition:.2s ease; }
+        .panel { box-sizing:border-box; min-width:0; position:relative; border:1px solid rgba(156,218,248,.13); border-radius:20px; background:rgba(255,255,255,.045); cursor:pointer; transition:.2s ease; }
         .panel:hover { background:rgba(255,255,255,.075); transform:translateY(-1px); }
         .compass { min-height:286px; padding:14px; text-align:center; }
         .compass svg { width:min(230px,100%); height:auto; }
@@ -126,7 +127,7 @@ class WindguruDashboard extends HTMLElement {
         .direction { font-size:27px; font-weight:760; }
         .direction span { color:#76d8ff; }
         .caption { color:#90adc0; font-size:11px; letter-spacing:.13em; text-transform:uppercase; }
-        .right { display:grid; grid-template-rows:1fr auto; gap:14px; }
+        .right { display:grid; min-width:0; grid-template-rows:1fr auto; gap:14px; }
         .gauge { min-height:215px; padding:10px 16px 14px; text-align:center; }
         .gauge svg { width:min(330px,100%); height:auto; margin-top:1px; }
         .gauge-value { margin-top:-64px; font-size:42px; font-weight:780; letter-spacing:-.04em; }
@@ -135,12 +136,13 @@ class WindguruDashboard extends HTMLElement {
         .gust-row { display:flex; justify-content:center; margin-top:13px; }
         .gust-pill { display:inline-flex; gap:8px; align-items:center; padding:7px 12px; border:1px solid rgba(255,166,64,.3); border-radius:999px; color:#ffd3a1; background:rgba(255,139,45,.11); font-size:12px; }
         .gust-pill b { color:#fff; font-size:15px; }
-        .temperature { display:flex; align-items:center; justify-content:space-between; min-height:76px; padding:13px 18px; }
+        .temperature { display:flex; align-items:center; justify-content:space-between; gap:10px; min-height:76px; padding:13px 18px; overflow:hidden; }
         .temp-left { display:flex; gap:12px; align-items:center; }
         .thermometer { display:grid; width:42px; height:42px; place-items:center; border-radius:14px; color:#ffbc66; background:rgba(255,172,67,.12); font-size:24px; }
         .temp-value { font-size:30px; font-weight:760; }
         .temp-value small { color:#9db7c7; font-size:15px; }
         .scale { fill:#7f9daf; font:11px sans-serif; }
+        @container (max-width:620px) { .layout { grid-template-columns:1fr; } .compass { min-height:260px; } }
         @media (max-width:560px) { .layout { grid-template-columns:1fr; } .compass { min-height:260px; } }
       </style>
       <ha-card>
