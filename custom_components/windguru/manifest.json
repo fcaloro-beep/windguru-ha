@@ -3,7 +3,7 @@
   "name": "Windguru Station",
   "codeowners": ["@fcaloro-beep"],
   "config_flow": true,
-  "dependencies": ["frontend"],
+  "dependencies": ["frontend", "http"],
   "documentation": "https://github.com/fcaloro-beep/windguru-ha",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
