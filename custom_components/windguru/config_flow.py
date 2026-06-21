@@ -76,7 +76,7 @@ class WindguruConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_country(self, user_input=None):
         if user_input is not None:
-            self._country_id = user_input["country_id"]
+            self._country_id = int(user_input["country_id"])
             return await self.async_step_station()
 
         session = async_get_clientsession(self.hass)
@@ -89,7 +89,7 @@ class WindguruConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             return self.async_abort(reason="cannot_connect")
 
         sorted_countries = sorted(countries.items(), key=lambda x: x[1])
-        country_options = {int(k): v for k, v in sorted_countries}
+        country_options = {k: v for k, v in sorted_countries}
 
         schema = vol.Schema({
             vol.Required("country_id"): vol.In(country_options),
@@ -98,7 +98,7 @@ class WindguruConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_station(self, user_input=None):
         if user_input is not None:
-            self._station_id = user_input["station_id"]
+            self._station_id = int(user_input["station_id"])
             return await self.async_step_confirm()
 
         session = async_get_clientsession(self.hass)
@@ -126,7 +126,7 @@ class WindguruConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         for s in filtered:
             sid = s["id_station"]
             label = s.get("spotname") or s.get("name") or f"Station {sid}"
-            stations_options[sid] = f"{label} (ID {sid})"
+            stations_options[str(sid)] = f"{label} (ID {sid})"
 
         schema = vol.Schema({
             vol.Required("station_id"): vol.In(stations_options),
@@ -153,14 +153,14 @@ class WindguruConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         params = {"q": "station", "id_station": self._station_id, "weather": True}
 
         try:
-            async with async_timeout.timeout(10):
-                resp = await session.get(API_BASE, headers=headers, params=params)
-                station = await resp.json()
-        except (aiohttp.ClientError, TimeoutError):
-            return self.async_show_form(
-                step_id="confirm", data_schema=self._confirm_schema(f"Station {self._station_id}"),
-                description_placeholders={"station": f"(ID {self._station_id})"},
-            )
+        async with async_timeout.timeout(10):
+            resp = await session.get(API_BASE, headers=headers, params=params)
+            station = await resp.json()
+    except (aiohttp.ClientError, TimeoutError):
+        return self.async_show_form(
+            step_id="confirm", data_schema=self._confirm_schema(f"Station {self._station_id}"),
+            description_placeholders={"station": f"(ID {self._station_id})"},
+        )
 
         default_name = station.get("name") or station.get("spotname", f"Station {self._station_id}")
 
