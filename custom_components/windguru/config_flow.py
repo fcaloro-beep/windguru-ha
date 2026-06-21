@@ -145,6 +145,9 @@ class WindguruConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 },
             )
 
+        await self.async_set_unique_id(f"windguru_{self._station_id}")
+        self._abort_if_unique_id_configured()
+
         session = async_get_clientsession(self.hass)
         headers = {"Referer": API_REFERER.format(station_id=self._station_id)}
         params = {"q": "station", "id_station": self._station_id, "weather": True}
@@ -154,21 +157,22 @@ class WindguruConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 resp = await session.get(API_BASE, headers=headers, params=params)
                 station = await resp.json()
         except (aiohttp.ClientError, TimeoutError):
-            return self.async_abort(reason="cannot_connect")
-
-        await self.async_set_unique_id(f"windguru_{self._station_id}")
-        self._abort_if_unique_id_configured()
+            return self.async_show_form(
+                step_id="confirm", data_schema=self._confirm_schema(f"Station {self._station_id}"),
+                description_placeholders={"station": f"(ID {self._station_id})"},
+            )
 
         default_name = station.get("name") or station.get("spotname", f"Station {self._station_id}")
 
-        schema = vol.Schema({
+        return self.async_show_form(
+            step_id="confirm", data_schema=self._confirm_schema(default_name),
+            description_placeholders={"station": f"{default_name} (ID {self._station_id})"},
+        )
+
+    def _confirm_schema(self, default_name):
+        return vol.Schema({
             vol.Required("name", default=default_name): str,
             vol.Optional("scan_interval", default=DEFAULT_SCAN_INTERVAL): vol.All(
                 vol.Coerce(int), vol.Range(min=MIN_SCAN_INTERVAL)
             ),
         })
-        return self.async_show_form(step_id="confirm", data_schema=schema,
-                                     description_placeholders={
-                                         "station": f"{default_name} (ID {self._station_id})",
-                                         "name": default_name,
-                                     })
