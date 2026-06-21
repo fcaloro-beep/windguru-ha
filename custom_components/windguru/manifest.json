@@ -1,0 +1,11 @@
+{
+  "domain": "windguru",
+  "name": "Windguru Station",
+  "codeowners": ["@torve"],
+  "config_flow": true,
+  "documentation": "https://github.com/torve/windguru-ha",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "requirements": [],
+  "version": "1.0.0"
+}

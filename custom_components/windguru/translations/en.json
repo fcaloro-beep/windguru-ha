@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "method": "How do you want to add a station?"
+        },
+        "description": "Choose how to find your Windguru station"
+      },
+      "manual": {
+        "data": {
+          "station_id": "Station ID (number from URL, e.g. 2791)",
+          "name": "Custom name (optional)",
+          "scan_interval": "Update interval (seconds)"
+        },
+        "description": "Enter the Windguru station ID. Found in the URL: https://www.windguru.cz/station/XXXXX"
+      },
+      "country": {
+        "data": {
+          "country_id": "Select country"
+        },
+        "description": "Choose a country to find available stations"
+      },
+      "station": {
+        "data": {
+          "station_id": "Select station"
+        },
+        "description": "{count} stations found. Choose one:"
+      },
+      "confirm": {
+        "data": {
+          "name": "Custom name",
+          "scan_interval": "Update interval (seconds)"
+        },
+        "description": "Confirm adding: {station}"
+      }
+    },
+    "error": {
+      "cannot_connect": "Cannot connect to Windguru",
+      "invalid_station": "Invalid station ID",
+      "unauthorized": "API access denied"
+    },
+    "abort": {
+      "already_configured": "Station already configured",
+      "cannot_connect": "Cannot connect to Windguru",
+      "no_stations": "No stations found for this country"
+    }
+  }
+}

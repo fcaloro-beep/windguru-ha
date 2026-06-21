@@ -1,0 +1,49 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "data": {
+          "method": "How do you want to add a station?"
+        },
+        "description": "Choose how to find your Windguru station"
+      },
+      "manual": {
+        "data": {
+          "station_id": "Station ID (numero dalla URL, es. 2791)",
+          "name": "Nome personalizzato (opzionale)",
+          "scan_interval": "Intervallo di aggiornamento (secondi)"
+        },
+        "description": "Inserisci l'ID della stazione Windguru. Lo trovi nell'URL: https://www.windguru.cz/station/XXXXX"
+      },
+      "country": {
+        "data": {
+          "country_id": "Seleziona nazione"
+        },
+        "description": "Scegli la nazione per trovare le stazioni disponibili"
+      },
+      "station": {
+        "data": {
+          "station_id": "Seleziona stazione"
+        },
+        "description": "{count} stazioni trovate. Scegli quella desiderata:"
+      },
+      "confirm": {
+        "data": {
+          "name": "Nome personalizzato",
+          "scan_interval": "Intervallo di aggiornamento (secondi)"
+        },
+        "description": "Conferma l'aggiunta di: {station}"
+      }
+    },
+    "error": {
+      "cannot_connect": "Impossibile connettersi a Windguru",
+      "invalid_station": "ID stazione non valido",
+      "unauthorized": "Accesso negato all'API"
+    },
+    "abort": {
+      "already_configured": "Stazione già configurata",
+      "cannot_connect": "Impossibile connettersi a Windguru",
+      "no_stations": "Nessuna stazione trovata per questa nazione"
+    }
+  }
+}
