@@ -6,58 +6,6 @@ MIN_SCAN_INTERVAL = 60
 API_BASE = "https://www.windguru.cz/int/iapi.php"
 API_REFERER = "https://www.windguru.cz/station/{station_id}"
 
-SENSOR_TYPES = {
-    "wind_avg": {
-        "name": "Wind Average",
-        "unit": "kn",
-        "icon": "mdi:weather-windy",
-        "device_class": "wind_speed",
-        "state_class": "measurement",
-    },
-    "wind_max": {
-        "name": "Wind Gust",
-        "unit": "kn",
-        "icon": "mdi:weather-windy",
-        "device_class": "wind_speed",
-        "state_class": "measurement",
-    },
-    "wind_min": {
-        "name": "Wind Min",
-        "unit": "kn",
-        "icon": "mdi:weather-windy",
-        "device_class": "wind_speed",
-        "state_class": "measurement",
-    },
-    "wind_direction": {
-        "name": "Wind Direction",
-        "unit": "°",
-        "icon": "mdi:compass-rose",
-        "device_class": None,
-        "state_class": None,
-    },
-    "temperature": {
-        "name": "Temperature",
-        "unit": "°C",
-        "icon": "mdi:thermometer",
-        "device_class": "temperature",
-        "state_class": "measurement",
-    },
-    "mslp": {
-        "name": "Pressure",
-        "unit": "hPa",
-        "icon": "mdi:gauge",
-        "device_class": "pressure",
-        "state_class": "measurement",
-    },
-    "rh": {
-        "name": "Humidity",
-        "unit": "%",
-        "icon": "mdi:water-percent",
-        "device_class": "humidity",
-        "state_class": "measurement",
-    },
-}
-
 COUNTRY_TIMEZONES = {
     380: ["Europe/Rome"],
     250: ["Europe/Paris"],
@@ -86,9 +34,30 @@ COUNTRY_TIMEZONES = {
     804: ["Europe/Kyiv"],
     643: ["Europe/Moscow", "Europe/Kaliningrad"],
     792: ["Europe/Istanbul"],
-    840: ["America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles", "America/Anchorage", "Pacific/Honolulu"],
-    124: ["America/Toronto", "America/Vancouver", "America/Winnipeg", "America/Halifax", "America/St_Johns"],
-    36: ["Australia/Sydney", "Australia/Melbourne", "Australia/Perth", "Australia/Brisbane", "Australia/Adelaide", "Australia/Hobart", "Australia/Darwin"],
+    840: [
+        "America/New_York",
+        "America/Chicago",
+        "America/Denver",
+        "America/Los_Angeles",
+        "America/Anchorage",
+        "Pacific/Honolulu",
+    ],
+    124: [
+        "America/Toronto",
+        "America/Vancouver",
+        "America/Winnipeg",
+        "America/Halifax",
+        "America/St_Johns",
+    ],
+    36: [
+        "Australia/Sydney",
+        "Australia/Melbourne",
+        "Australia/Perth",
+        "Australia/Brisbane",
+        "Australia/Adelaide",
+        "Australia/Hobart",
+        "Australia/Darwin",
+    ],
     554: ["Pacific/Auckland", "Pacific/Chatham"],
     76: ["America/Sao_Paulo", "America/Fortaleza", "America/Manaus"],
     32: ["America/Argentina/Buenos_Aires"],

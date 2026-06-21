@@ -1,11 +1,12 @@
 {
   "domain": "windguru",
   "name": "Windguru Station",
-  "codeowners": ["@torve"],
+  "codeowners": ["@fcaloro-beep"],
   "config_flow": true,
-  "documentation": "https://github.com/torve/windguru-ha",
+  "documentation": "https://github.com/fcaloro-beep/windguru-ha",
+  "issue_tracker": "https://github.com/fcaloro-beep/windguru-ha/issues",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
   "requirements": [],
-  "version": "1.0.0"
+  "version": "1.1.0"
 }

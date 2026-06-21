@@ -9,41 +9,41 @@
       },
       "manual": {
         "data": {
-          "station_id": "Station ID (numero dalla URL, es. 2791)",
-          "name": "Nome personalizzato (opzionale)",
-          "scan_interval": "Intervallo di aggiornamento (secondi)"
+          "station_id": "Station ID (number from URL, e.g. 2791)",
+          "name": "Custom name (optional)",
+          "scan_interval": "Update interval (seconds)"
         },
-        "description": "Inserisci l'ID della stazione Windguru. Lo trovi nell'URL: https://www.windguru.cz/station/XXXXX"
+        "description": "Enter the Windguru station ID. Found in the URL: https://www.windguru.cz/station/XXXXX"
       },
       "country": {
         "data": {
-          "country_id": "Seleziona nazione"
+          "country_id": "Select country"
         },
-        "description": "Scegli la nazione per trovare le stazioni disponibili"
+        "description": "Choose a country to find available stations"
       },
       "station": {
         "data": {
-          "station_id": "Seleziona stazione"
+          "station_id": "Select station"
         },
-        "description": "{count} stazioni trovate. Scegli quella desiderata:"
+        "description": "{count} stations found. Choose one:"
       },
       "confirm": {
         "data": {
-          "name": "Nome personalizzato",
-          "scan_interval": "Intervallo di aggiornamento (secondi)"
+          "name": "Custom name",
+          "scan_interval": "Update interval (seconds)"
         },
-        "description": "Conferma l'aggiunta di: {station}"
+        "description": "Confirm adding: {station}"
       }
     },
     "error": {
-      "cannot_connect": "Impossibile connettersi a Windguru",
-      "invalid_station": "ID stazione non valido",
-      "unauthorized": "Accesso negato all'API"
+      "cannot_connect": "Cannot connect to Windguru",
+      "invalid_station": "Invalid station ID",
+      "unauthorized": "API access denied"
     },
     "abort": {
-      "already_configured": "Stazione già configurata",
-      "cannot_connect": "Impossibile connettersi a Windguru",
-      "no_stations": "Nessuna stazione trovata per questa nazione"
+      "already_configured": "Station already configured",
+      "cannot_connect": "Cannot connect to Windguru",
+      "no_stations": "No stations found for this country"
     }
   }
 }

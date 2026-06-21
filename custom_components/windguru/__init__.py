@@ -1,16 +1,13 @@
-import asyncio
-from datetime import timedelta
 import logging
-
-import aiohttp
-import async_timeout
+from datetime import timedelta
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 
-from .const import API_BASE, API_REFERER, DEFAULT_SCAN_INTERVAL, DOMAIN
+from .api import WindguruApiClient, WindguruApiError
+from .const import DEFAULT_SCAN_INTERVAL, DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -29,16 +26,18 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     unload_ok = await hass.config_entries.async_unload_platforms(entry, PLATFORMS)
     if unload_ok:
         hass.data[DOMAIN].pop(entry.entry_id)
-    return True
+    return unload_ok
 
 
 class WindguruDataCoordinator(DataUpdateCoordinator):
     def __init__(self, hass: HomeAssistant, entry: ConfigEntry):
         self.station_id = entry.data["station_id"]
         self.station_name = entry.data.get("name", f"Station {self.station_id}")
-        self._session = async_get_clientsession(hass)
+        self._api = WindguruApiClient(async_get_clientsession(hass))
 
-        update_interval = timedelta(seconds=entry.data.get("scan_interval", DEFAULT_SCAN_INTERVAL))
+        update_interval = timedelta(
+            seconds=entry.data.get("scan_interval", DEFAULT_SCAN_INTERVAL)
+        )
 
         super().__init__(
             hass,
@@ -48,18 +47,7 @@ class WindguruDataCoordinator(DataUpdateCoordinator):
         )
 
     async def _async_update_data(self):
-        headers = {"Referer": API_REFERER.format(station_id=self.station_id)}
-        params = {"q": "station_data_current", "id_station": self.station_id}
-
         try:
-            async with async_timeout.timeout(10):
-                resp = await self._session.get(API_BASE, headers=headers, params=params)
-                resp.raise_for_status()
-                data = await resp.json()
-        except (aiohttp.ClientError, asyncio.TimeoutError) as err:
-            raise UpdateFailed(f"Error fetching data: {err}") from err
-
-        if "error" in data:
-            raise UpdateFailed(f"API error: {data['error']}")
-
-        return data
+            return await self._api.async_get_current(self.station_id)
+        except WindguruApiError as err:
+            raise UpdateFailed(f"Error fetching Windguru data: {err}") from err
