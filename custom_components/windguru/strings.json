@@ -13,7 +13,7 @@
           "name": "Custom name (optional)",
           "scan_interval": "Update interval (seconds)"
         },
-        "description": "Enter the Windguru station ID. Found in the URL: https://www.windguru.cz/station/XXXXX"
+        "description": "Enter the numeric ID shown at the end of the Windguru station page address"
       },
       "country": {
         "data": {

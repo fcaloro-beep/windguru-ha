@@ -11,7 +11,7 @@
           "name": "Nome personalizzato (opzionale)",
           "scan_interval": "Intervallo di aggiornamento (secondi)"
         },
-        "description": "Inserisci l'ID presente nell'URL: https://www.windguru.cz/station/XXXXX"
+        "description": "Inserisci l'ID numerico alla fine dell'indirizzo della pagina della stazione Windguru"
       },
       "country": {
         "data": {"country_id": "Seleziona nazione"},

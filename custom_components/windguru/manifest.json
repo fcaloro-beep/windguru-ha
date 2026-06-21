@@ -4,9 +4,9 @@
   "codeowners": ["@fcaloro-beep"],
   "config_flow": true,
   "documentation": "https://github.com/fcaloro-beep/windguru-ha",
-  "issue_tracker": "https://github.com/fcaloro-beep/windguru-ha/issues",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/fcaloro-beep/windguru-ha/issues",
   "requirements": [],
   "version": "1.1.0"
 }
