@@ -14,7 +14,7 @@ Windguru weather stations.
 
 ## Talamone dashboard
 
-Version 1.2.3 includes a dashboard card with no additional frontend dependency.
+Version 1.2.4 includes a dashboard card with no additional frontend dependency.
 After restarting Home Assistant, add a manual card and paste:
 
 ```yaml
